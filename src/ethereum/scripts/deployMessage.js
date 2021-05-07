@@ -38,8 +38,8 @@ const deploy = async () => {
 
   const MessageCreator = await new web3.eth.Contract(JSON.parse(compiledMessageCreator).abi)
     .deploy({ data: JSON.parse(compiledMessageCreator).bytecode })
-    .send({ from: accounts[0], gas: "5000000" })
-    .catch(err => console.log(err));
+    .send({ from: accounts[0], gas: "5555555" })
+    .catch(err => console.log("error: ", err));
   console.log("contract deployed to: ", MessageCreator.options.address);
 };
 deploy();

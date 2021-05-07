@@ -3,7 +3,7 @@ import MessageCreator from './artifacts/contracts/MessageCreator.sol/MessageCrea
 
 // we need the contract address and abi to export our contract
 // well.
-const contractAddress = '';
+const contractAddress = '0xEd593bBd5C8cBba51fA034Dbd5EE09875e2D6F79';
 const abi = MessageCreator.abi;
 
 const messageCreator = new web3.eth.Contract(abi, contractAddress);
