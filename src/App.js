@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+// react imports
+import React, { useEffect } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// ethereum imports
+import web3 from "./ethereum/web3";
+
+const App = () => {
+  useEffect(() => {
+    const getAccount = async () => {
+      const accounts = await web3.eth.getAccounts();
+      console.log(accounts);
+    };
+    getAccount();
+  }, []);
+  return <div>hello</div>;
+};
 
 export default App;
