@@ -8,10 +8,12 @@ import messageCreator from "./ethereum/messageCreator";
 // aframe imports
 import "aframe";
 import { Entity } from "aframe-react";
+require("aframe-super-keyboard");
 
 const App = () => {
   // messages state
   const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const getAccount = async () => {
@@ -27,10 +29,9 @@ const App = () => {
   }, []);
 
   const returnSquares = messages.map((element, index) => {
-    console.log(element.message);
-    let position = `1, 3, ${index * -2}`;
-    let positionMessage = `-1, 3.75, ${index * -2}`;
-    let positionOwner = `-1, 2, ${index * -2}`;
+    let position = `1, 2, ${index * -2}`;
+    let positionMessage = `-1, 2.75, ${index * -2}`;
+    let positionOwner = `-1, 1, ${index * -2}`;
     return (
       <Entity>
         <Entity geometry={{ primitive: "box" }} position={position}></Entity>{" "}
@@ -57,6 +58,8 @@ const App = () => {
       <a-sky color="#333333"></a-sky>
       <a-camera></a-camera>
       {returnSquares}
+      {/* Mouse cursor */}
+      <Entity id="mouseCursor" cursor="rayOrigin: mouse" mouse-cursor></Entity>{" "}
       <Entity
         geometry={{ primitive: "plane", width: 10, height: 10 }}
         position="0 0 -4"
@@ -92,6 +95,19 @@ const App = () => {
         position="0 5 -4"
         rotation="90 0 0"
         material="color: #7BC8A4"
+      ></Entity>
+      <Entity
+        id="keyboard"
+        super-keyboard={{ hand: "#mouseCursor" }}
+        position="-1 1.3 -1"
+        rotation="-30 0 0"
+        scale="4 4 4"
+        events={{
+          superkeyboardchange: (e) => {
+            console.log(e.detail.value);
+            setMessage(e.detail.value);
+          },
+        }}
       ></Entity>
     </a-scene>
   );
