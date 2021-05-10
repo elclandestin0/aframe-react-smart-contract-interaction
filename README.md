@@ -1,2 +1,2 @@
 # aframe-solidity-boilerplate
-Boilerplate project to combine AFrame and React with Solidity
+Smart contract interaction with AFrame and React
