@@ -57,29 +57,13 @@ const App = () => {
   const sendMessage = async () => {
     const accounts = await web3.eth.getAccounts();
     console.log(accounts[0]);
-    await messageCreator.methods.addPaper().send({
+    await messageCreator.methods.addPaper(message).send({
       from: accounts[0],
     });
   };
 
   return (
     <a-scene>
-      <a-assets>
-        <a-mixin
-          id="beveled-square"
-          geometry="primitive: cone; radiusTop: 0.15; radiusBottom: 0.19; height: 0.02; segmentsRadial: 4; segmentsHeight: 1"
-          rotation="0 45 0"
-        ></a-mixin>
-        <a-mixin
-          id="square"
-          geometry="primitive: box; width: 0.18; height: 0.025; depth: 0.18;"
-          position="0 0.02 0"
-        ></a-mixin>
-        <a-mixin id="blue" material="color: #1E2768;"></a-mixin>
-        <a-mixin id="darkgreen" material="color: #22FF90;"></a-mixin>
-        <a-mixin id="yellow" material="color: #FFF88E;"></a-mixin>
-        <a-mixin id="offset" position="0 0.01 0"></a-mixin>
-      </a-assets>
       {/* sky and camera */}
       <a-sky color="#333333"></a-sky>
       <a-camera>
@@ -143,11 +127,28 @@ const App = () => {
         scale="4 4 4"
         events={{
           superkeyboardchange: (e) => {
-            console.log(e.detail.value);
             setMessage(e.detail.value);
           },
         }}
       ></Entity>
+      {/* Button assets */}
+      <a-assets>
+        <a-mixin
+          id="beveled-square"
+          geometry="primitive: cone; radiusTop: 0.15; radiusBottom: 0.19; height: 0.02; segmentsRadial: 4; segmentsHeight: 1"
+          rotation="0 45 0"
+        ></a-mixin>
+        <a-mixin
+          id="square"
+          geometry="primitive: box; width: 0.18; height: 0.025; depth: 0.18;"
+          position="0 0.02 0"
+        ></a-mixin>
+        <a-mixin id="blue" material="color: #1E2768;"></a-mixin>
+        <a-mixin id="darkgreen" material="color: #22FF90;"></a-mixin>
+        <a-mixin id="yellow" material="color: #FFF88E;"></a-mixin>
+        <a-mixin id="offset" position="0 0.01 0"></a-mixin>
+      </a-assets>
+      {/* Button */}
       <Entity
         id="buttonStd"
         ui-button={{
@@ -155,7 +156,7 @@ const App = () => {
           top: "square, darkgreen",
           pressed: "yellow, offset",
         }}
-        position="0 0.4 -0.2"
+        position="-1 0.4 -0.2"
         rotation="30 0 0"
         scale="3 3 3"
         events={{
